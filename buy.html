@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const SPENDING_THRESHOLD = 200;
+      const TAX_RATE = 0.08;
+      const IPHONE_PRICE = 65995;
+      const GALAXY_PRICE = 61995;
+      const PHONE_COVER = 700;
+      const PHONE_CHARGER = 1500;
+
+      var help = "";
+      var bank_balance = 100000;
+      var amount = 0;
+      total = [];
+
+      function ask() {
+        help = prompt(`
+      How can i help you? 
+
+      1 - What phones are available?
+      2 - What accessories are available?
+      3 - I want an Iphone.
+      4 - I want an Android.
+      5 - I want a cover.
+      6 - I want a charger.
+      7 - Exit.
+      `);
+      }
+
+      while (help != "7") {
+        ask();
+        switch (help) {
+          case "1":
+            console.log(`
+          Iphone 15 Pro Max: $65,995
+          S24 Ultra: $61,995
+          `);
+            break;
+
+          case "2":
+            console.log(`
+            Phone cover: $700
+            Phone charger: $1500
+            `);
+            break;
+
+          case "3":
+            amount = amount + IPHONE_PRICE;
+            total.push("Iphone 15 Pro Max: $65,995");
+            console.log(`Iphone added to cart your total is: ${amount}`);
+            break;
+
+          case "4":
+            amount = amount + GALAXY_PRICE;
+            total.push("S24 Ultra: $61,995");
+            console.log(`Galaxy added to cart your total is: ${amount}`);
+            break;
+
+          case "5":
+            amount = amount + PHONE_COVER;
+            total.push("Phone cover: $700 ");
+            console.log(`Cover added to cart your total is: ${amount}`);
+            break;
+
+          case "6":
+            amount = amount + PHONE_CHARGER;
+            total.push("Phone charger: $1500");
+            console.log(`Charger added to cart your total is: ${amount}`);
+            break;
+
+          case "7":
+            console.log("Thanks for your visit");
+            break;
+
+          default:
+            console.log("This is not a valid option.");
+        }
+      }
+
+      function calculateTax(amount) {
+        total.push("Taxes: " + amount * TAX_RATE);
+        return amount * TAX_RATE;
+      }
+
+      function formatAmount(amount) {
+        return "$" + amount.toFixed(2);
+      }
+
+      // Keep buying phones while you still have money
+
+      // don't forget to pay the government, too
+      amount = amount + calculateTax(amount);
+
+      console.log("Your purchase plus taxes is: " + formatAmount(amount));
+      // Your purchase: $334.76
+
+      // can you actually afford this purchase?
+      if (amount > bank_balance) {
+        console.table(total);
+        console.log("You can't afford this purchase. 🙁");
+        console.log(
+          `Account balance is: ${bank_balance} you're missing ${(
+            amount - bank_balance
+          ).toFixed(2)} keep saving.`
+        );
+      } else {
+        console.table(total);
+      }
+    </script>
+  </body>
+</html>
